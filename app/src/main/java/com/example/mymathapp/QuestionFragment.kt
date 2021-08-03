@@ -23,10 +23,10 @@ class QuestionFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_question, container, false)
 
-        vModel = ViewModelProvider(this).get(MyViewModel::class.java)
+        vModel = ViewModelProvider(requireActivity()).get(MyViewModel::class.java)
         //Toast.makeText(context, vModel.)
 
-        binding.tvQuestion.text = vModel.getQuestion()
+        binding.tvQuestion.text = vModel.generateQuestion()
 
         binding.btnEnd.setOnClickListener(){
             Navigation.findNavController(it).navigate(R.id.action_questionFragment_to_resultFragment)
@@ -38,9 +38,11 @@ class QuestionFragment : Fragment() {
 
         binding.btnSubmit.setOnClickListener(){
             val userInput : Int = binding.tfAnswer.text.toString().toInt()
-            if(vModel.getAnswer() == userInput){
-                vModel.score += 1
+            val ans = vModel.getAnswer()
+            if(ans == userInput){
+                vModel.updateScore()
             }
+            binding.tvQuestion.text =vModel.generateQuestion()
         }
 
         return  binding.root

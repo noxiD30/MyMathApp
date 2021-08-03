@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.example.mymathapp.data.MyViewModel
 import com.example.mymathapp.databinding.FragmentRegisterBinding
@@ -21,11 +22,11 @@ class RegisterFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_register, container, false)
 
-        vModel = MyViewModel()
+        vModel = ViewModelProvider(requireActivity()).get(MyViewModel::class.java)
 
         binding.btnStart.setOnClickListener(){
             val name = binding.tfInputName.text.toString()
-            vModel.name = name
+            vModel.updateName(name)
 
             Navigation.findNavController(it).navigate(R.id.action_registerFragment_to_questionFragment)
         }

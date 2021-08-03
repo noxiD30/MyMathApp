@@ -9,8 +9,8 @@ class MyViewModel : ViewModel() {
     var score: Int = 0
 
     fun generateQuestion():String{
-        var num1 = (Math.random()*100).toInt()
-        var num2 = (Math.random()*100).toInt()
+         num1 = (Math.random()*100).toInt()
+         num2 = (Math.random()*100).toInt()
 
         return "${num1} + ${num2} = ?"
     }
@@ -21,5 +21,18 @@ class MyViewModel : ViewModel() {
 
     fun getAnswer():Int{
         return num1 + num2
+    }
+
+    fun updateScore(){
+        this.score ++
+    }
+    fun updateName(inputName: String){
+        this.name = inputName
+    }
+    fun getUser():String{
+        return name
+    }
+    fun getScoree():Int{
+        return score
     }
 }

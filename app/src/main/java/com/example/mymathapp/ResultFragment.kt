@@ -22,14 +22,14 @@ class ResultFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_result, container, false)
 
-        vModel = ViewModelProvider(this).get(MyViewModel::class.java)
+        vModel = ViewModelProvider(requireActivity()).get(MyViewModel::class.java)
 
-        binding.tvName.text = vModel.name
+        binding.tvName.text = vModel.getUser()
 
-        binding.tvScore.text =vModel.score.toString()
+        binding.tvScore.text =vModel.getScoree().toString()
 
         binding.btnOK.setOnClickListener(){
-            Navigation.findNavController(it).navigate(R.id.action_registerFragment_to_questionFragment)
+            Navigation.findNavController(it).navigate(R.id.action_resultFragment_to_registerFragment)
         }
 
 
